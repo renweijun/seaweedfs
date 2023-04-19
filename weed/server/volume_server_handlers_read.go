@@ -143,7 +143,7 @@ func (vs *VolumeServer) GetOrHeadHandler(w http.ResponseWriter, r *http.Request)
 		glog.V(4).Infof("read needle: %v", err)
 		// start to fix it from other replicas, if not deleted and hasVolume and is not a replicated request
 	}
-	// glog.V(4).Infoln("read bytes", count, "error", err)
+	glog.V(4).Infoln("read bytes", count, "error", err)
 	if err != nil || count < 0 {
 		glog.V(3).Infof("read %s isNormalVolume %v error: %v", r.URL.Path, hasVolume, err)
 		if err == storage.ErrorNotFound || err == storage.ErrorDeleted {
