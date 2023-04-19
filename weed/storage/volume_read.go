@@ -25,6 +25,7 @@ func (v *Volume) readNeedle(n *needle.Needle, readOption *ReadOption, onReadSize
 		return -1, ErrorNotFound
 	}
 	readSize := nv.Size
+	glog.V(3).Infof("Key:%v,Offset:%v,readSize: %v", nv.Key, nv.Offset, nv.Size)
 	if readSize.IsDeleted() {
 		if readOption != nil && readOption.ReadDeleted && readSize != TombstoneFileSize {
 			glog.V(3).Infof("reading deleted %s", n.String())
