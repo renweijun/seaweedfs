@@ -47,7 +47,7 @@ public class SeaweedInputStream extends InputStream {
 
         this.visibleIntervalList = SeaweedRead.nonOverlappingVisibleIntervals(filerClient, entry.getChunksList());
 
-        LOG.debug("new path:{} entry:{} visibleIntervalList:{}", path, entry, visibleIntervalList);
+        LOG.debug("new fullpath:{} entry:{} visibleIntervalList:{}", path, entry, visibleIntervalList);
 
     }
 

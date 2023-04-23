@@ -34,6 +34,7 @@ func (v *Volume) readNeedle(n *needle.Needle, readOption *ReadOption, onReadSize
 			return -1, ErrorDeleted
 		}
 	}
+	glog.V(3).Infof("reading deleted 2 %s", n.String())
 	if readSize == 0 {
 		return 0, nil
 	}
