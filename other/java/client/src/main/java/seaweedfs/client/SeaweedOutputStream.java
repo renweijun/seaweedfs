@@ -134,7 +134,7 @@ public class SeaweedOutputStream extends OutputStream {
             throw new IndexOutOfBoundsException();
         }
 
-        // System.out.println(path + " write [" + (outputIndex + off) + "," + ((outputIndex + off) + length) + ")");
+        System.out.println(path + " write [" + (outputIndex + off) + "," + ((outputIndex + off) + length) + ")");
 
         int currentOffset = off;
         int writableBytes = bufferSize - buffer.position();
@@ -148,7 +148,7 @@ public class SeaweedOutputStream extends OutputStream {
                 break;
             }
 
-            // System.out.println(path + "     [" + (outputIndex + currentOffset) + "," + ((outputIndex + currentOffset) + writableBytes) + ") " + buffer.capacity());
+            System.out.println(path + "     [" + (outputIndex + currentOffset) + "," + ((outputIndex + currentOffset) + writableBytes) + ") " + buffer.capacity());
             buffer.put(data, currentOffset, writableBytes);
             outputIndex += writableBytes;
             currentOffset += writableBytes;
@@ -224,9 +224,9 @@ public class SeaweedOutputStream extends OutputStream {
             waitForTaskToComplete();
         }
         final Future<Void> job = completionService.submit(() -> {
-            // System.out.println(path + " is going to save [" + (writePosition) + "," + ((writePosition) + bytesLength) + ")");
+            System.out.println(path + " is going to save [" + (writePosition) + "," + ((writePosition) + bytesLength) + ")");
             SeaweedWrite.writeData(entry, replication, filerClient, writePosition, bufferToWrite.array(), bufferToWrite.position(), bufferToWrite.limit(), path);
-            // System.out.println(path + " saved [" + (writePosition) + "," + ((writePosition) + bytesLength) + ")");
+            System.out.println(path + " saved [" + (writePosition) + "," + ((writePosition) + bytesLength) + ")");
             ByteBufferPool.release(bufferToWrite);
             return null;
         });
