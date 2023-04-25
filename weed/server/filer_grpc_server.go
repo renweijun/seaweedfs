@@ -191,7 +191,7 @@ func (fs *FilerServer) UpdateEntry(ctx context.Context, req *filer_pb.UpdateEntr
 		fs.filer.DeleteChunks(garbage)
 
 		fs.filer.NotifyUpdateEvent(ctx, entry, newEntry, true, req.IsFromOtherCluster, req.Signatures)
-		glog.V(4).Infof("UpdateEntry2 %v,%v,%v", ctx, entry, newEntry)
+		glog.V(4).Infof("UpdateEntry2 ctx:%v,entry:%v,newEntry:%v,garbage:%v,chunks:%v", ctx, entry, newEntry, garbage, chunks)
 	} else {
 		glog.V(3).Infof("UpdateEntry3 %s: %v", filepath.Join(req.Directory, req.Entry.Name), err)
 	}
