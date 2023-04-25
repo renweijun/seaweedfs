@@ -167,7 +167,7 @@ func (fs *FilerServer) CreateEntry(ctx context.Context, req *filer_pb.CreateEntr
 
 func (fs *FilerServer) UpdateEntry(ctx context.Context, req *filer_pb.UpdateEntryRequest) (*filer_pb.UpdateEntryResponse, error) {
 
-	glog.V(4).Infof("UpdateEntry %v", req)
+	glog.V(4).Infof("UpdateEntry1 %v", req)
 
 	fullpath := util.Join(req.Directory, req.Entry.Name)
 	entry, err := fs.filer.FindEntry(ctx, util.FullPath(fullpath))
@@ -193,7 +193,7 @@ func (fs *FilerServer) UpdateEntry(ctx context.Context, req *filer_pb.UpdateEntr
 		fs.filer.NotifyUpdateEvent(ctx, entry, newEntry, true, req.IsFromOtherCluster, req.Signatures)
 
 	} else {
-		glog.V(3).Infof("UpdateEntry %s: %v", filepath.Join(req.Directory, req.Entry.Name), err)
+		glog.V(3).Infof("UpdateEntry2 %s: %v", filepath.Join(req.Directory, req.Entry.Name), err)
 	}
 
 	return &filer_pb.UpdateEntryResponse{}, err
