@@ -116,12 +116,13 @@ func (f *Filer) DirectDeleteChunks(chunks []*filer_pb.FileChunk) {
 
 func (f *Filer) DeleteChunks(chunks []*filer_pb.FileChunk) {
 	for _, chunk := range chunks {
+		glog.V(4).Infof("resolvemanifest1 %v;%v", chunk.FileId, chunk.GetFileIdString())
 		if !chunk.IsChunkManifest {
 			f.fileIdDeletionQueue.EnQueue(chunk.GetFileIdString())
 			continue
 		}
 		dataChunks, manifestResolveErr := ResolveOneChunkManifest(f.MasterClient.LookupFileId, chunk)
-		glog.V(4).Infof("resolvemanifest1 %s;%v;%v", chunk.FileId, manifestResolveErr, chunk.GetFileIdString())
+		glog.V(4).Infof("resolvemanifest2 %s;%v;%v", chunk.FileId, manifestResolveErr, chunk.GetFileIdString())
 		if manifestResolveErr != nil {
 			glog.V(0).Infof("failed to resolve manifest %s: %v", chunk.FileId, manifestResolveErr)
 		}
@@ -129,7 +130,7 @@ func (f *Filer) DeleteChunks(chunks []*filer_pb.FileChunk) {
 			f.fileIdDeletionQueue.EnQueue(dChunk.GetFileIdString())
 		}
 		f.fileIdDeletionQueue.EnQueue(chunk.GetFileIdString())
-		glog.V(4).Infof("resolvemanifest2 %s;%v;%v", chunk.FileId, manifestResolveErr, chunk.GetFileIdString())
+		glog.V(4).Infof("resolvemanifest3 %s;%v;%v", chunk.FileId, manifestResolveErr, chunk.GetFileIdString())
 
 	}
 }
